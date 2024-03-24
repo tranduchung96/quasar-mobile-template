@@ -1,0 +1,9 @@
+{
+  "appId": "com.hungtd.mobiletemplate",
+  "appName": "Quasar App",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "url": "http://192.168.10.12:9500"
+  }
+}
