@@ -22,7 +22,22 @@ const routes: RouteRecordRaw[] = [
     path: '/account',
     component: () => import('pages/AccountPage.vue'),
   },
-
+  {
+    path: '/welcome',
+    component: () => import('pages/WelcomePage.vue'),
+  },
+  {
+    path: '/splash',
+    component: () => import('pages/SplashPage.vue'),
+  },
+  {
+    path: '/login',
+    component: () => import('pages/LoginPage.vue'),
+  },
+  {
+    path: '/register',
+    component: () => import('pages/RegisterPage.vue'),
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
