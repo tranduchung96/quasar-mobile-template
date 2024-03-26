@@ -16,7 +16,7 @@
         outline
         text-color="white"
         size="lg"
-        padding="5px 50px"
+        padding="5px 0"
         class="w-1/2"
         to="/splash"
       >

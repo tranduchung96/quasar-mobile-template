@@ -10,8 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import {
+  computed,
+  // onMounted
+} from 'vue';
 
 defineOptions({
   name: 'App'
@@ -19,13 +22,13 @@ defineOptions({
 
 
 
-const $router = useRouter();
+const $route = useRoute();
 
-onMounted(()=>{
-  setTimeout(()=>{
-    $router.push({path: '/welcome'})
-  }, 2000)
-})
-const key = computed(() => $router.currentRoute.value.fullPath);
+// onMounted(()=>{
+//   setTimeout(()=>{
+//     $router.push({path: '/welcome'})
+//   }, 2000)
+// })
+const key = computed(() => $route.path);
 
 </script>

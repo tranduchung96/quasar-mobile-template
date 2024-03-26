@@ -106,6 +106,7 @@ const form = reactive({
           size="md"
           padding="13px 0"
           class="w-full"
+          to="/tabs/home"
         >
           Login
         </q-btn>
