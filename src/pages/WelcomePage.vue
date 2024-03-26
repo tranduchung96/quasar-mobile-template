@@ -9,7 +9,7 @@
         Geeta.
       </span>
     </div>
-    <div class="flex flex-row justify-center pt-3">
+    <div class=" w-screen flex flex-row justify-center pt-4">
       <q-btn
         rounded
         no-caps
@@ -17,6 +17,7 @@
         text-color="white"
         size="lg"
         padding="5px 50px"
+        class="w-1/2"
         to="/splash"
       >
         Shop Now

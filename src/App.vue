@@ -1,11 +1,17 @@
 <template>
 
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive>
+        <component :is="Component" :key="key" />
+      </keep-alive>
+    </transition>
+  </router-view>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
 defineOptions({
   name: 'App'
@@ -20,5 +26,6 @@ onMounted(()=>{
     $router.push({path: '/welcome'})
   }, 2000)
 })
+const key = computed(() => $router.currentRoute.value.fullPath);
 
 </script>

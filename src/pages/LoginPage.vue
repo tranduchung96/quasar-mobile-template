@@ -46,7 +46,7 @@ const form = reactive({
     </div>
 
 
-    <div class="form pt-4">
+    <form class="form pt-4">
       <div class="flex flex-col px-6 justify-start pt-4">
         <label class="text-sm text-bold pt-1">
           Email address
@@ -110,13 +110,27 @@ const form = reactive({
           Login
         </q-btn>
       </div>
-    </div>
+    </form>
     <div class="pt-2">
-      <div class="flex flex-row justify-center">
-        <span>
-          Not registered yet?
-        </span>
-        <a>Create an Account</a>
+      <div class="flex flex-row justify-center align-middle">
+        <div class="flex flex-col justify-center">
+
+          <span>
+            Not registered yet?
+          </span>
+        </div>
+        <q-btn
+          no-caps
+          no-wrap
+          padding="0"
+          outline
+          flat
+          dense
+          text-color="primary"
+          label=" Create a account"
+          to="/register"
+        />
+
       </div>
     </div>
   </div>

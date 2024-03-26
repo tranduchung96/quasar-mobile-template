@@ -11,6 +11,7 @@ const back = async () => {
   $router.back();
 };
 const form = reactive({
+  username: '',
   email: '',
   password: '',
   rememberMe: false
@@ -20,7 +21,7 @@ const form = reactive({
 <template>
   <div class="h-screen flex flex-col justify-start ">
     <div class="login h-1/3 w-screen">
-      <div class="flex justify-center py-3">
+      <div class="flex justify-center">
         <q-toolbar>
           <q-btn
             flat
@@ -45,8 +46,25 @@ const form = reactive({
     </div>
 
 
-    <div class="form pt-4">
-      <div class="flex flex-col px-6 justify-start pt-4">
+    <form class="form">
+      <div class="flex flex-col px-6 justify-start">
+        <label class="text-sm text-bold pt-1">
+          User name
+        </label>
+        <q-input
+          v-model="form.email"
+          outlined
+          borderless
+          hide-hint
+          type="email"
+          hint="Enter you name"
+        >
+          <template v-slot:prepend>
+            <q-icon size="xs" name="person" />
+          </template>
+        </q-input>
+      </div>
+      <div class="flex flex-col px-6 justify-start">
         <label class="text-sm text-bold pt-1">
           Email address
         </label>
@@ -83,20 +101,6 @@ const form = reactive({
           </template>
         </q-input>
       </div>
-      <div class="flex flex-row px-6 justify-between pt-1">
-        <div class="flex flex-col justify-center">
-          <q-checkbox
-            v-model="form.rememberMe"
-            label="Remember me"
-            class="text-xs"
-          />
-        </div>
-        <div class="flex flex-col justify-center">
-          <a>
-            Forgot Password?
-          </a>
-        </div>
-      </div>
       <div class="w-screen flex px-6 flex-row justify-center pt-1">
         <q-btn
           rounded
@@ -106,16 +110,15 @@ const form = reactive({
           padding="13px 0"
           class="w-full"
         >
-          Login
+          Register
         </q-btn>
       </div>
-    </div>
+    </form>
     <div class="pt-2">
       <div class="flex flex-row justify-center">
         <span>
-          Not registered yet?
+          By  joining I agree to receive emails from Geeta.
         </span>
-        <a>Create an Account</a>
       </div>
     </div>
   </div>
