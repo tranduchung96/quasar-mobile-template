@@ -67,9 +67,7 @@ const rating = ref(5);
             $ {{ product?.price }}  USD
           </span>
         </div>
-
       </div>
-
     </q-card-section>
 
     <q-card-section>
