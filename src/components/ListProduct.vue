@@ -117,11 +117,12 @@ const products: Product[] = [
 </script>
 
 <template>
-  <div class="flex flex-row flex-wrap justify-center align-middle">
+  <div class="flex flex-row flex-wrap justify-start align-middle">
     <template v-for="product in products" v-bind:key="product.id">
-      <ProductComponent :product="product" />
+      <ProductComponent class="basis-1/2" :product="product" />
     </template>
 
   </div>
+
 </template>
 

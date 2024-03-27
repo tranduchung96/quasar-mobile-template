@@ -5,53 +5,49 @@ import ListProduct from 'components/ListProduct.vue';
 
 defineOptions({
   name: 'HomePage'
-})
-const tabs: {name: string, label: string}[] = [
+});
+
+const tabs: { name: string, label: string }[] = [
   {
     name: 'popular',
-    label: 'Popular',
+    label: 'Popular'
   },
   {
-    name: 'mens',
-    label: 'Mens',
+    name: 'men',
+    label: 'Men'
   },
   {
-    name: 'womens',
-    label: 'Womens',
+    name: 'women',
+    label: 'Women'
   },
   {
     name: 'sale',
-    label: 'Sale',
-  },
+    label: 'Sale'
+  }
+];
 
-]
-const tab = ref('');
+const tab = ref<string>('mails');
 </script>
 
 <template>
   <div>
     <q-tabs
+      class="text-gray-500 pt-5"
       v-model="tab"
-      inline-label
-      class="bg-white text-gray-500 text-bold pt-5 "
-      active-color="primary"
       mobile-arrows
       narrow-indicator
       no-caps
       dense
-      shrink
+      align="justify"
+      active-color="primary"
     >
-      <template v-for="t in tabs" v-bind:key="t.name">
-        <q-tab
-          :name="t.name"
-          :label="t.label"
-          class=""
-        />
+      <template v-for="tab in tabs" v-bind:key="tab.name">
+        <q-tab :name="tab.name" :label="tab.label" />
       </template>
     </q-tabs>
     <FilterSortProduct class="px-5 pt-8" />
     <div class="flex flex-row justify-center pt-5 px-4">
       <ListProduct />
     </div>
-</div>
+  </div>
 </template>

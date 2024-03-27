@@ -21,8 +21,9 @@ const openProduct = ()=>{
 </script>
 
 <template>
+  <div class="px-5">
     <q-card
-      class="w-1/3 p-2 mx-5 mb-5 rounded-3xl"
+      class="p-2 mb-5 rounded-3xl"
       style="min-height: 200px"
       flat
       bordered
@@ -49,5 +50,6 @@ const openProduct = ()=>{
         icon="favorite"
       />
     </q-card>
+  </div>
 </template>
 

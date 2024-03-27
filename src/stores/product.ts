@@ -3,14 +3,14 @@ import { Product } from 'components/models';
 
 
 export const useProductStore = defineStore('product', {
-  state: ()=>({
+  state: () => ({
     selectedProduct: null as (Product | null)
   }),
   getters: {
-    getSelectedProduct: (state) => state.selectedProduct
+    getSelectedProduct: (state) => (state.selectedProduct as Product | null)
   },
   actions: {
-    setSelectedProduct(product: Product){
+    setSelectedProduct(product: Product) {
       this.selectedProduct = product;
     }
   }
