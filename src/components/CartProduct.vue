@@ -20,7 +20,7 @@ const product = ref({
 <template>
 
   <div class="px-2">
-    <q-card class="rounded-xl border-2 bg-gray-400" flat bordered>
+    <q-card class="rounded-xl border-2 bg-gray-100" flat bordered>
       <q-card-section horizontal>
         <q-card-section class="col-4 flex flex-center">
           <q-img
@@ -28,17 +28,25 @@ const product = ref({
             :src="product.image"
           />
         </q-card-section>
-        <q-card-section class="q-pt-xs">
+        <q-card-section class="flex flex-col justify-center">
           <div class="text-overline">Printed Shirt</div>
-          <div class="text-caption text-grey">
+          <div class="text-caption text-black">
             {{product.category}}
           </div>
-          <div>
-            $ {{product.price}} USD
+          <div class="text-bold text-lg">
+            ${{product.price}}.<span class="text-base">00 USD</span>
           </div>
         </q-card-section>
         <q-card-actions class="flex flex-col justify-between">
-          <q-btn size="sm" flat round icon="clear" />
+          <div class="flex flex-row justify-end w-full">
+            <q-btn
+              size="sm"
+              flat
+              round
+              padding="0 0"
+              icon="clear"
+            />
+          </div>
           <QuantitySelect size="xs" />
         </q-card-actions>
       </q-card-section>

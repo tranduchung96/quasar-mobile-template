@@ -2,12 +2,8 @@
 
 import { useRouter } from 'vue-router';
 import CartProduct from 'components/CartProduct.vue';
-import { ref } from 'vue';
-import CheckoutComponent from 'components/CheckoutComponent.vue';
 
 const $router = useRouter();
-
-const checkout = ref<boolean>(false);
 </script>
 
 <template>
@@ -25,7 +21,7 @@ const checkout = ref<boolean>(false);
             class="absolute"
           />
           <q-toolbar-title class="text-center text-black">
-            My Cart
+            Wish List
           </q-toolbar-title>
         </q-toolbar>
       </q-header>
@@ -40,31 +36,17 @@ const checkout = ref<boolean>(false);
           color="primary"
           padding="10px 0"
           rounded
-          @click="checkout = !checkout"
         >
           <div class="w-full flex flex-row justify-between">
             <div class="flex-1">
-              <q-icon name="logout" />
-              Go to Checkout
+              <q-icon name="shopping_bag" />
+              Add all to cart
             </div>
-            <span class="pr-3">
-              $135.96
-            </span>
           </div>
         </q-btn>
       </q-footer>
-      <q-dialog
-        class="checkout-dialog"
-        v-model="checkout"
-        full-width
-        transition-show="slide-up"
-        transition-hide="slide-down"
-      >
-        <CheckoutComponent />
-      </q-dialog>
     </q-layout>
+
   </div>
 
 </template>
-
-

@@ -16,7 +16,8 @@ const quantity = ref(1);
     <q-btn
       @click="quantity = (quantity > 1? quantity - 1:quantity)"
       label="-"
-      round
+      :round="size!=='xs'"
+      :rounded="size==='xs'"
       no-wrap
       :size="size??'md'"
     />
@@ -33,7 +34,8 @@ const quantity = ref(1);
     <q-btn
       @click="quantity++"
       label="+"
-      round
+      :round="size!=='xs'"
+      :rounded="size==='xs'"
       no-wrap
       :size="size??'md'"
     />

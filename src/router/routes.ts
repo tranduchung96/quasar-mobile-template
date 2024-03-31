@@ -46,6 +46,22 @@ const routes: RouteRecordRaw[] = [
     path: '/cart',
     component: () => import('pages/CartPage.vue'),
   },
+  {
+    path: '/card',
+    component: () => import('pages/CardPage.vue'),
+  },
+  {
+    path: '/search',
+    component: () => import('pages/SearchPage.vue'),
+  },
+  {
+    path: '/wishlist',
+    component: () => import('pages/WishListPage.vue'),
+  },
+  {
+    path: '/congrats',
+    component: () => import('pages/CongratsPage.vue'),
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

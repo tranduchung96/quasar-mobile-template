@@ -14,16 +14,37 @@
             </q-badge>
             <q-tooltip>Notifications</q-tooltip>
           </q-btn>
-          <q-btn round dense flat color="grey-8" icon="shopping_bag">
+          <q-btn
+            round
+            dense
+            flat
+            color="grey-8"
+            icon="shopping_bag"
+            to="/cart"
+          >
             <q-badge color="red" text-color="white" floating>
               3
             </q-badge>
             <q-tooltip>Messages</q-tooltip>
           </q-btn>
-          <q-btn round dense flat color="grey-8" icon="favorite">
+          <q-btn
+            round
+            dense
+            flat
+            color="grey-8"
+            icon="favorite"
+            to="/wishlist"
+          >
             <q-tooltip>Wish List</q-tooltip>
           </q-btn>
-          <q-btn round dense flat color="grey-8" icon="search">
+          <q-btn
+            round
+            dense
+            flat
+            color="grey-8"
+            icon="search"
+            to="/search"
+          >
             <q-tooltip>Cart</q-tooltip>
           </q-btn>
           <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu" icon="menu" />
@@ -34,7 +55,11 @@
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-grey-2" :width="240">
       <q-scroll-area class="fit">
         <q-list padding>
-
+            <q-item>
+              <q-item-section>
+                <q-btn to="/congrats">Congrats</q-btn>
+              </q-item-section>
+            </q-item>
         </q-list>
       </q-scroll-area>
     </q-drawer>
