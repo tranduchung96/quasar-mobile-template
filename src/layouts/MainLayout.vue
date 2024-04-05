@@ -52,16 +52,14 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-grey-2" :width="240">
-      <q-scroll-area class="fit">
-        <q-list padding>
-            <q-item>
-              <q-item-section>
-                <q-btn to="/congrats">Congrats</q-btn>
-              </q-item-section>
-            </q-item>
-        </q-list>
-      </q-scroll-area>
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+      class="bg-grey-2"
+      side="right"
+      :width="240">
+      <MenuLayout  @close="leftDrawerOpen = false" />
     </q-drawer>
 
     <q-page-container>
@@ -79,6 +77,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import MenuLayout from 'layouts/MenuLayout.vue';
 // import TabsPage from 'pages/tabs/TabsPage.vue';
 
 defineOptions({

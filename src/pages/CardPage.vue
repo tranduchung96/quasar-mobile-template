@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import { useRouter } from 'vue-router';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 const $router = useRouter();
 const cardIfo = reactive<{
@@ -15,6 +15,8 @@ const cardIfo = reactive<{
   expire: '',
   cvc: ''
 });
+const front = ref(true);
+
 </script>
 
 <template>
@@ -37,34 +39,43 @@ const cardIfo = reactive<{
         </q-toolbar>
       </q-header>
       <q-page-container>
-        <div class="flex flex-col justify-start">
-          <div class="bg-primary px-10 mx-5 rounded">
-            <div class="flex flex-row justify-end py-4">
-              <q-img width="64px" height="40px" src="src/assets/card_logo.png" />
-            </div>
-            <div class="flex justify-between py-4">
-              <span class="text-xl">
-                5757
-              </span>
-              <span class="text-xl">
-                4747
-              </span>
-              <span class="text-xl">
-                5757
-              </span>
-              <span class="text-xl">
-                4747
-              </span>
-            </div>
-            <div class="flex justify-between py-4">
-              <div class="text-lg">
-                Varat Singh Sharma
+        <div class="flex flex-col justify-start pt-10">
+          <template v-if="front">
+            <div class="flex flex-col justify-evenly bg-primary px-10 mx-5 rounded min-h-52"  @click="front = !front">
+              <div class="flex flex-row justify-end">
+                <q-img width="64px" src="src/assets/card_logo.png" />
               </div>
-              <div class="text-lg">
-                7/21
+              <div class="flex justify-between">
+                <span class="text-xl">
+                  {{cardIfo.number.slice(0,4)}}
+                </span>
+                <span class="text-xl">
+                  {{cardIfo.number.slice(6,10)}}
+                </span>
+                <span class="text-xl">
+                  {{cardIfo.number.slice(12,16)}}
+                </span>
+                <span class="text-xl">
+                  {{cardIfo.number.slice(18,22)}}
+                </span>
+              </div>
+              <div class="flex justify-between">
+                <div class="text-lg uppercase">
+                  {{cardIfo.name}}
+                </div>
+                <div class="text-lg">
+                  {{cardIfo.expire}}
+                </div>
               </div>
             </div>
-          </div>
+          </template>
+          <template v-else >
+            <div class="flex flex-col justify-center align-bottom bg-primary px-10 mx-5 rounded min-h-52" @click="front = !front">
+              <div class="text-bold text-xl text-right px-20 bg-white ">
+                {{cardIfo.cvc}}
+              </div>
+            </div>
+          </template>
           <div class="flex justify-center py-5">
             <q-img
               src="src/assets/camera_icon.svg"
@@ -87,10 +98,10 @@ const cardIfo = reactive<{
                     bottom-slots
                     fill-mask
                     borderless
+                    color="grey-400"
                     v-model="cardIfo.name"
                     type="text"
-                    lazy-rules
-                    input-class="rounded"
+                    input-class="rounded text-xl uppercase"
                   />
                 </q-item-section>
               </q-item>
@@ -106,8 +117,9 @@ const cardIfo = reactive<{
                     bottom-slots
                     fill-mask
                     borderless
-                    :stack-label="false"
-                    type="number"
+                    input-class="tracking-widest text-xl"
+                    type="text"
+                    mask="####  ####  ####  ####"
                     v-model="cardIfo.number"
                   >
 
@@ -132,11 +144,13 @@ const cardIfo = reactive<{
                       hide-hint
                       round
                       bottom-slots
-                      fill-mask
                       borderless
                       :stack-label="false"
-                      type="date"
+                      mask="## / ##"
+                      hint="yy/mm"
+                      fill-mask
                       v-model="cardIfo.expire"
+                      input-class="tracking-widest text-xl"
                     />
                   </q-item-section>
                 </q-item-section>
@@ -150,17 +164,21 @@ const cardIfo = reactive<{
                       hide-hint
                       round
                       bottom-slots
-                      fill-mask
                       borderless
                       :stack-label="false"
-                      type="number"
+                      mask="# # #"
+                      fill-mask
+                      hint="CVC: 012"
+                      type="text"
                       v-model="cardIfo.cvc"
+                      input-class="tracking-widest text-xl"
                     >
                       <template v-slot:append>
                         <q-img width="40px" height="30px" src="src/assets/cvc_hint.svg" />
                       </template>
                     </q-input>
                   </q-item-section>
+
                 </q-item-section>
               </q-item>
               </q-form>
