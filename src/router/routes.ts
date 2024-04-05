@@ -22,7 +22,50 @@ const routes: RouteRecordRaw[] = [
     path: '/account',
     component: () => import('pages/AccountPage.vue'),
   },
-
+  {
+    path: '/welcome',
+    component: () => import('pages/WelcomePage.vue'),
+  },
+  {
+    path: '/splash',
+    component: () => import('pages/SplashPage.vue'),
+  },
+  {
+    path: '/login',
+    component: () => import('pages/LoginPage.vue'),
+  },
+  {
+    path: '/register',
+    component: () => import('pages/RegisterPage.vue'),
+  },
+  {
+    path: '/product',
+    component: () => import('pages/ProductDetailPage.vue'),
+  },
+  {
+    path: '/cart',
+    component: () => import('pages/CartPage.vue'),
+  },
+  {
+    path: '/card',
+    component: () => import('pages/CardPage.vue'),
+  },
+  {
+    path: '/search',
+    component: () => import('pages/SearchPage.vue'),
+  },
+  {
+    path: '/wishlist',
+    component: () => import('pages/WishListPage.vue'),
+  },
+  {
+    path: '/congrats',
+    component: () => import('pages/CongratsPage.vue'),
+  },
+  {
+    path: '/failed',
+    component: () => import('pages/FailedOrderPage.vue'),
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
