@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-
+import { useFirebaseAuth } from 'vuefire';
+import { createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+// import { useQuasar } from 'quasar';
 defineOptions({
   name: 'RegisterPage'
 });
 const $router = useRouter();
-
+const $fireAuth = useFirebaseAuth();
+// const $q = useQuasar();
 const back = async () => {
   $router.back();
 };
@@ -16,6 +19,38 @@ const form = reactive({
   password: '',
   rememberMe: false
 });
+const register = async ()=>{
+  if(!$fireAuth){
+    // $q.notify({
+    //   message: 'Register fail because can not auth !',
+    //   color: 'danger'
+    // })
+    return;
+  }
+  try {
+    const userCredential = await createUserWithEmailAndPassword($fireAuth, form.email, form.password);
+    console.log(userCredential);
+    if(userCredential) {
+      await updateProfile(userCredential.user, {displayName: form.username});
+      // $q.notify({
+      //   message: 'Login success !',
+      //   color: 'success'
+      // });
+
+      await $router.push({
+        path: '/tabs'
+      })
+    }
+
+  } catch (error){
+    // $q.notify({
+    //   message: error as string,
+    //   color: 'danger'
+    // });
+    console.log(error);
+  }
+
+}
 </script>
 
 <template>
@@ -52,11 +87,12 @@ const form = reactive({
           User name
         </label>
         <q-input
-          v-model="form.email"
+          v-model="form.username"
           outlined
           borderless
           hide-hint
           type="email"
+          bg-color="transparent"
           hint="Enter you name"
         >
           <template v-slot:prepend>
@@ -94,6 +130,7 @@ const form = reactive({
           borderless
           hide-hint
           type="password"
+          autocomplete="on"
           hint="Enter your password"
         >
           <template v-slot:prepend>
@@ -109,6 +146,7 @@ const form = reactive({
           size="md"
           padding="13px 0"
           class="w-full"
+          @click="register"
         >
           Register
         </q-btn>

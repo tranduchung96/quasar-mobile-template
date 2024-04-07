@@ -2,11 +2,15 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import { useFirebaseAuth } from 'vuefire';
+import { EmailValidate, PasswordValidate } from 'src/utilities/validate';
+
 defineOptions({
   name: 'LoginPage'
 });
 const $router = useRouter();
-
+const $fireAuth = useFirebaseAuth();
 const back = async () => {
   $router.back();
 };
@@ -15,6 +19,31 @@ const form = reactive({
   password: '',
   rememberMe: false
 });
+const login = async ()=>{
+  if(!$fireAuth) return;
+  if(!form.email){
+    return;
+  }
+  if(!EmailValidate(form.email)){
+    form.email = '';
+    return;
+  }
+
+  if(!form.password){
+    return;
+  }
+  if(!PasswordValidate(form.password)){
+    form.password = '';
+    return;
+  }
+
+  const userCredential = await signInWithEmailAndPassword($fireAuth, form.email, form.password);
+  if(userCredential){
+    await $router.push({
+      path: '/tabs/home'
+    });
+  }
+}
 </script>
 
 <template>
@@ -63,7 +92,7 @@ const form = reactive({
             <q-icon size="xs" name="email" />
           </template>
           <template v-slot:append>
-            <q-icon size="xs" name="error" />
+            <q-icon size="xs" name="error" :color="form.email?'':'negative'" />
           </template>
         </q-input>
       </div>
@@ -77,10 +106,14 @@ const form = reactive({
           borderless
           hide-hint
           type="password"
+          autocomplete="on"
           hint="Enter your password"
         >
           <template v-slot:prepend>
             <q-icon size="xs" name="lock" />
+          </template>
+          <template v-slot:append="">
+            <q-icon size="xs" name="error" :color="form.email?'':'negative'" />
           </template>
         </q-input>
       </div>
@@ -93,7 +126,7 @@ const form = reactive({
           />
         </div>
         <div class="flex flex-col justify-center">
-          <a>
+          <a @click="$router.push({path: '/forgot'})">
             Forgot Password?
           </a>
         </div>
@@ -106,7 +139,7 @@ const form = reactive({
           size="md"
           padding="13px 0"
           class="w-full"
-          to="/tabs/home"
+         @click="login"
         >
           Login
         </q-btn>
