@@ -7,6 +7,7 @@ import {
 } from 'vue-router';
 
 import routes from './routes';
+import { getCurrentUser } from 'vuefire';
 
 /*
  * If not building with SSR mode, you can
@@ -25,12 +26,30 @@ export default route(function (/* { store, ssrContext } */) {
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
-
-    // Leave this as is and make changes in quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
+
+  Router.beforeEach(async (to, from)=>{
+    if(to?.meta?.disableIfLoggedIn){
+      const currentUser = await getCurrentUser();
+      if(currentUser){
+        return {
+          path: from.fullPath
+        }
+      }
+    }
+    if(to?.meta?.requiresAuth){
+      const currentUser = await getCurrentUser();
+      if (!currentUser) {
+        return {
+          path: '/login',
+          query: {
+            redirect: to.fullPath,
+          },
+        }
+      }
+    }
+  });
   return Router;
 });
