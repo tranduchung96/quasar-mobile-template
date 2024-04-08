@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import {sendPasswordResetEmail} from 'firebase/auth';
 import { useFirebaseAuth } from 'vuefire';
 import { EmailValidate } from 'src/utilities/validate';
+import { showInfoNotify, showWarningNotify } from 'src/utilities/notify';
 
 defineOptions({
   name: 'ForgotPasswordPage'
 });
 const $router = useRouter();
 const $fireAuth = useFirebaseAuth();
+const showBack = ref(false);
 const back = async () => {
   $router.back();
 };
@@ -20,16 +22,17 @@ const form = reactive({
 const reset = async ()=>{
   if(!$fireAuth) return;
   if(!form.email){
+    showWarningNotify('Email is required !');
     return;
   }
   if(!EmailValidate(form.email)){
     form.email = '';
+    showWarningNotify('Email invalid !')
     return;
   }
   await sendPasswordResetEmail($fireAuth, form.email);
-
-  $router.back();
-
+  showInfoNotify('Send email success !')
+  showBack.value = true;
 }
 </script>
 
@@ -93,6 +96,20 @@ const reset = async ()=>{
           @click="reset"
         >
           Send email reset
+        </q-btn>
+      </div>
+      <div
+        v-show="showBack"
+        class="w-screen flex px-6 flex-row justify-center pt-5">
+        <q-btn
+          rounded
+          outline
+          size="md"
+          padding="13px 0"
+          class="w-full"
+          @click="back"
+        >
+          Back to login
         </q-btn>
       </div>
     </form>

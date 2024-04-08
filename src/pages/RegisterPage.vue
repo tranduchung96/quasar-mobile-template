@@ -3,13 +3,12 @@ import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useFirebaseAuth } from 'vuefire';
 import { createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
-// import { useQuasar } from 'quasar';
+import { showErrorNotify, showInfoNotify } from 'src/utilities/notify';
 defineOptions({
   name: 'RegisterPage'
 });
 const $router = useRouter();
 const $fireAuth = useFirebaseAuth();
-// const $q = useQuasar();
 const back = async () => {
   $router.back();
 };
@@ -21,10 +20,7 @@ const form = reactive({
 });
 const register = async ()=>{
   if(!$fireAuth){
-    // $q.notify({
-    //   message: 'Register fail because can not auth !',
-    //   color: 'danger'
-    // })
+    showErrorNotify('Register fail because can not auth !')
     return;
   }
   try {
@@ -32,21 +28,14 @@ const register = async ()=>{
     console.log(userCredential);
     if(userCredential) {
       await updateProfile(userCredential.user, {displayName: form.username});
-      // $q.notify({
-      //   message: 'Login success !',
-      //   color: 'success'
-      // });
-
+      showInfoNotify('Register success !')
       await $router.push({
         path: '/tabs'
       })
     }
 
   } catch (error){
-    // $q.notify({
-    //   message: error as string,
-    //   color: 'danger'
-    // });
+    showErrorNotify('Register error !')
     console.log(error);
   }
 
@@ -135,6 +124,9 @@ const register = async ()=>{
         >
           <template v-slot:prepend>
             <q-icon size="xs" name="lock" />
+          </template>
+          <template v-slot:append>
+            <q-icon size="xs" name="error" />
           </template>
         </q-input>
       </div>
