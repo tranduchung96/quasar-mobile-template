@@ -26,7 +26,7 @@ const tabs: { name: string, label: string }[] = [
   }
 ];
 
-const tab = ref<string>('mails');
+const tab = ref<string>('popular');
 </script>
 
 <template>

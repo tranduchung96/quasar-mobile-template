@@ -4,7 +4,10 @@ import { useRouter } from 'vue-router';
 
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import { useFirebaseAuth } from 'vuefire';
-import { EmailValidate, PasswordValidate } from 'src/utilities/validate';
+import {
+  EmailValidate,
+  // PasswordValidate
+} from 'src/utilities/validate';
 
 defineOptions({
   name: 'LoginPage'
@@ -29,13 +32,13 @@ const login = async ()=>{
     return;
   }
 
-  if(!form.password){
-    return;
-  }
-  if(!PasswordValidate(form.password)){
-    form.password = '';
-    return;
-  }
+  // if(!form.password){
+  //   return;
+  // }
+  // if(!PasswordValidate(form.password)){
+  //   form.password = '';
+  //   return;
+  // }
 
   const userCredential = await signInWithEmailAndPassword($fireAuth, form.email, form.password);
   if(userCredential){
